@@ -1,0 +1,54 @@
+syntax = "proto3";
+package msg;
+option go_package = "github.com/seanhufs/zgo-server/pb/pbm";
+
+// All Cmd defined here
+// All CS Cmd defined here, use [0, 10000000], each server step by 1000
+// cmd base = serviceId * 1000 ;
+// example:
+// CSLobbyCmd: [5001, 6000]
+// CSMatchRoomCmd: [7001, 8000]
+//
+// Server internal cmd use [1000000, 20000000], each server step by 1000
+// cmd base = 1000,0000 + serviceId * 1000;
+// Example:
+// SSLobbyCmd: [10005001, 10006000]
+// SSMatchRoomCmd: [10007001, 10008000]
+//...
+
+enum EServiceID
+{
+    SERVICE_ID_NULL = 0;
+    SERVICE_ID_LOGIN = 1;
+    SERVICE_ID_LOBBY = 2;
+    SERVICE_ID_ACCOUNT = 3;
+    SERVICE_ID_MATCH_MAKING = 4;
+    SERVICE_ID_MATCH_ROOM = 5;
+    SERVICE_ID_MAIL = 6;
+    SERVICE_ID_CHAT = 7;
+    SERVICE_ID_ACTIVITY = 8;
+    SERVICE_ID_ACHIEVE = 9;
+    SERVICE_ID_FRIEND = 10;
+    SERVICE_ID_RANK = 11;
+    SERVICE_ID_TEAM = 12;
+}
+
+enum EServerPkgCmd
+{
+    SERVER_PKG_CMD_NULL = 0;
+//****************************************************
+// CS Cmd define begin
+//****************************************************
+    // CSLobbyCmd: [2001, 3000] Begin
+
+    CS_LOBBY_HEARTBEAT_REQ = 2001; //CSLobbyHeartbeatReq
+    CS_LOBBY_HEARTBEAT_RES = 2002; //CSLobbyHeartbeatRes
+
+    CS_LOBBY_PLAYER_LOGIN_REQ = 2003; // CSLobbyLoginReq
+	CS_LOBBY_PLAYER_LOGIN_RES = 2004; // CSLobbyLoginRes
+
+    CS_LOBBY_PLAYER_LOGOUT_REQ = 2005; //CSLobbyLogoutReq
+	CS_LOBBY_PLAYER_LOGOUT_RES = 2006; //CSLobbyLogoutRes
+
+    // CSLobbyCmd: [2001, 3000] End
+}

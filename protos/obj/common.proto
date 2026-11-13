@@ -1,0 +1,225 @@
+syntax = "proto3";
+package obj;
+option go_package = "github.com/seanhufs/zgo-server/pb/pbo";
+
+enum ECommonMacro
+{
+    option allow_alias              = true;
+    kCommonMacroNone = 0;
+    GUILD_NAME_MAX_LEN              = 34;   //战队名字最大长度
+    GUILD_SLOGAN_MAX_LEN            = 66;   //战队slogan最大长度
+    GUILD_BULLETIN_MAX_LEN          = 130;  //战队公告最大长度
+    GUILD_MESSAGES_MAX_LEN          = 34;   //战队留言最大长度
+    GUILD_APPLY_CONTENT_MAX_LEN     = 34;
+    GUILD_MEMBER_MAX_NUM            = 100;   //战队最多拥有成员数量
+    GUILD_APPLY_DATA_MAX_NUM        = 10;   //战队最多拥有的未处理的加入请求数量
+    GUILD_INVITE_DATA_MAX_NUM       = 10;   //战队最多拥有的未处理的要求数量
+    GUILD_MESSAGE_MAX_NUM           = 100;  //战队最多换成留言数量
+    PLAYER_NAME_MAX_LEN             = 32;   //玩家名字最大长度
+    MAX_GAME_NICK_LEN               = 32;   //玩家名字最大长度
+    MAX_PIC_URL_LEN                 = 64;   //最大pic_url地址长度
+    MAX_GAMEFRIEND_NUM              = 100;  //最大游戏内好友数
+    MAX_GAMEFRIEND_MESSAGE_NUM      = 20;   //最大游戏内好友消息数
+    MAX_GAMEFRIEND_BLACKLIST_NUM    = 100;  //最大游戏内好友黑名单数量
+    MAX_REASON_LEN                  = 128;  //最大Reason长度
+    MAX_PUNISH_ITEM_NUM             = 30;   //最大惩罚数量
+    GUILD_MEDAL_SHOW_MAX_NUM        = 3;    //战队图标个数
+    MAX_CHAT_MESSAGE_LEN            = 1024; //最大聊天消息长度
+    MAX_OFFLINE_CHAT_MESSAGE_NUM    = 50;   //离线消息最大数量
+    MAX_OPEN_ID_LEN                 = 64;   //open_id最大长度
+    MAX_NEWBIE_GUIDE_NUM            = 32;   //newbie guide列表最大长度
+    MAX_APPLY_JOIN_NUM              = 32;   //apply join列表最大长度
+    GUILD_ICON_MAX_LEN              = 32;   //公会icon长度
+    GUILD_NEWS_MAX_NUM              = 100;  //公会news
+    EMEDAL_TYPE_MAX                 = 100;
+    MAX_COUNTRY_LEN                 = 32;
+    MAX_PROVINCE_LEN                = 32;
+    MAX_CITY_LEN                    = 32;
+    MAX_ISP_LEN                     = 32;
+    MAX_TELECOM_OPER_LEN            = 32;
+    MAX_NETWORK_LEN                 = 32;
+    MAX_INVENTORY_RETICLE_NUM       = 100;      //无用
+    MAX_INVENTORY_CAMO_NUM          = 100;      //无用
+    MAX_INVENTORY_GRENADE_NUM       = 200;      //仓库最大手雷数量
+    MAX_INVENTORY_PERK_NUM          = 200;      //仓库最大Perk数量
+    MAX_INVENTORY_SCORESTREAK_NUM   = 50;       //仓库最大连杀奖励数量
+    MAX_INVENTORY_FIREARM_NUM       = 500;      //仓库最大武器数量
+    MAX_INVENTORY_ROLE_NUM          = 200;      //仓库最大角色数量
+    MAX_INVENTORY_BOX_NUM           = 200;      //仓库最大宝箱数量
+    MAX_INVENTORY_WEAPONSKILL_NUM   = 200;      //仓库最大武器技能数量
+    MAX_INVENTORY_ROLESKILL_NUM     = 200;      //仓库最大角色技能数量
+    MAX_INVENTORY_ATTACHMENT_NUM    = 250;      //仓库最大附件数量
+    MAX_INVENTORY_CHIP_NUM          = 200;      //仓库最大碎片数量
+    MAX_INVENTORY_JETPACK_NUM       = 50;       //仓库最大喷漆背包数量
+    MAX_INVENTORY_INDIVIDUATION_ITEM_NUM = 500; //展示型道具数量
+    MAX_INVENTORY_ACCUMULATE_ITEM_NUM = 500;   //仓库最大累加型道具数量
+    MAX_INVENTORY_LUCKY_BOX_NUM     = 200;	//幸运宝箱的最大上限
+    MAX_ATTACH_NUM_PER_FIREARM      = 4;        //单武器最大附件数
+    MAX_OPTIC_NUM_PER_FIREARM       = 1;
+    MAX_SKILL_NUM_PER_FIREARM       = 1;
+    MAX_CONCISERESULT_NUM_PER_FIREARM = 10;
+    MAX_ITEM_NUM_PER_BOX            = 5;
+    MAX_SKILL_NUM_PER_ROLE          = 2;
+    MAX_ATTACHMENT_NUM_PER_MAIL     = 5;        //每封邮件的附件上限值
+    MAX_RECOMMEND_FRIENDS           = 20;
+    GUILD_EVENT_DATA_MAX_NUM        = 20; //公会日志条数
+    MAX_DB_COMPOSITE_ITEM_NUM       = 20; //个数
+    MAX_WEAPONSKILL_NUM             = 20;
+    MAX_ROLESKILL_NUM               = 20;
+    MAX_INVENTORY_OPTIC_NUM         = 20; //拥有的瞄准镜
+
+    MAX_INVENTORY_ITEM_COMMON_NUM   = 20; //拥有的物品的索引,目前不存DB,仅用于程序实现中
+    MAX_INVENTORY_DB_COMPOSITE_NUM  = 20; //合成待获得的物品信息
+
+    MAX_BAG_WEAPON_ATTACHMENT_NUM   = 20; //
+    //MAX_MEDAL_NUM                     = 50;
+    MAX_GROUP_FRIENDS               = 14;
+
+    PLAYER_RELATION_NICK_MAX_LEN    = 34;//玩家社交名字
+
+    GUILD_SNS_GROUP_ID_MAX_LEN = 34;
+    MAX_TIMELIMIT_ITEM_NUM = 200;
+    MAX_SELECTED_MEDAL_NUM = 5;
+    MAX_SELECETD_ACH_NUM = 5;
+
+    JOIN_GUILD_MIN_LEVEL = 5; //加入公会最小等级
+};
+
+//分配8位
+enum EAccountType
+{
+    kAccountTypeNone = 0;
+    kAccountTypeWX_OPENID = 1;
+    kAccountTypeQQ_OPENID = 2;
+    kAccountTypeIOS_GUEST = 3;
+    kAccountTypeFacebook  = 4;
+};
+
+enum ECSPlatId
+{
+    kPlatIdNone = 0;
+    kPlatIdPC = 1;
+    kPlatIdIOS = 2;
+    kPlatIdAndroid = 3;
+};
+
+message PlayerPictureInfo
+{
+    uint32 selected_pic_id = 1;
+	bytes  selected_pic_url = 3; //128
+    uint32 selected_frame_id = 2;
+    uint32 selected_flag_id  = 4; 
+};
+
+message PlayerSimpleInfo
+{
+    uint64 player_id = 1;
+    bytes nick_name = 2;      //PLAYER_NAME_MAX_LEN
+    PlayerPictureInfo pic_info = 3;
+    int32 exp = 4;                             //经验
+    int32 exp_lvl = 5;                         //经验等级
+    int32 vip_lvl = 6;
+    int32 monthcard_level = 15;
+    uint32 ex_vip_flag = 10;     //外部会员标志，ExternalVipFlagsEnum
+    int32 fight_point = 7;
+    uint64 role_id = 8;
+    int32 seat_index = 9; // for roomsvr, other svr ignore
+    int32 ladder_score = 11;
+    int32 hidden_score = 12;
+    int32 kd_ratio = 13;
+    //PlayerPunishInfo player_punish_info = 14;
+    uint32 drop_timestamp = 16;
+    int32 today_drop_times = 17;
+    int32 has_hero_weapon = 18;
+    int32 login_source = 19;
+
+    bytes clan_name = 20;                  //GUILD_NAME_MAX_LEN
+    uint32 suit_id = 21;
+    uint32 client_ip = 22;
+    uint64 ladder_medal = 23;
+
+    uint32 data_flag   = 24;
+    int32 camp         = 25;
+    int32 plat_id      = 26;
+    int32 account_type = 27;
+    int32 zone_id      = 28;
+    string open_id     = 29; //MAX_OPEN_ID_LEN
+    uint32 diamond     = 30;
+    bytes country      = 31;  //MAX_COUNTRY_LEN
+    bytes province     = 32;  //MAX_PROVINCE_LEN
+    bytes city         = 33;  //MAX_CITY_LEN
+    bytes isp          = 34;  //MAX_ISP_LEN
+    bytes telecom_oper = 35;  //MAX_TELECOM_OPER_LEN
+    bytes network      = 36;  //MAX_NETWORK_LEN
+    int32 match_mmr    = 37;
+
+    //DsaPingInfo ping_info = 38; //20
+    uint64 clan_id        = 39;
+    uint32 clan_level     = 40;
+
+    //选定的dsc group id
+    int32 dsc_group_id = 41;
+    int32 spvp_times_game = 42;
+    int32 peak_lvl = 43;
+    int32 pract_mode = 44;
+    uint32 ladder_level = 45;
+    int32 br_match_mmr    = 46;
+    int32 br_ladder_score = 47;
+    int32 br_hidden_score = 48;
+
+    string king_core_user_id = 49; //64
+    string king_install_id = 50;   //64
+    string king_session_id = 51;   //64
+
+    //repeated Prop props = 52; //10 //选定的道具信息(比如带入局内的强化道具, 复活币等)
+    uint64 dsa_ver = 53;
+    uint32 br_ladder_level = 54;
+    int32 spvp_match_fail = 77; //spvp普通匹配失败标志
+    int32 spvp_ladder_fail = 78; //spvp天梯赛匹配失败标志
+    uint32 pve_history_max_round = 79; 
+    uint32 pve_daily_max_round = 80; 
+    bool is_spvp_grading = 81; //是否处于定级赛
+    bool is_in_promotion = 82; //是否处于晋级赛
+    bytes clan_icon      = 83; // 32 clan's icon
+    bytes access_token   = 84; // 64 
+    uint64 start_match_id = 85; //每次匹配唯一标志
+    uint64 login_time = 86;
+    uint64 last_login_time = 87;
+	uint64 player_guid = 88;
+	int32 br_real_hidden_score = 89; //br偏离前的隐藏分，主要用于结算
+};
+
+message MatchPlayerInfo
+{
+    uint64 player_id = 1;
+    int32 camp = 2;
+    int32 seat_index = 3;
+    uint32 zone_bus_id = 4;
+    bool is_robot = 5;
+    PlayerSimpleInfo profile = 6;
+    bool is_halfway_join = 8;
+    bool is_team = 9; 
+    uint32 bot_id = 10;    
+    //选定的squad_idx
+    int32 squad_idx = 11;
+    uint32 main_weapon_id = 12;
+    uint32 ovr = 13;
+    bool is_gangup = 14;
+    uint32 team_id = 15;
+    uint32 group_id = 16;
+    uint32 match_type = 17;
+    uint32 start_alloc_time = 18;
+    bool purchase_warm_game = 31;  //是否购买力温暖局
+    uint64 is_observer_friend = 32;
+    //grouproom相关信息，带到matchroom后，用这三个信息来唯一确定一个grouproom。
+    uint32 group_room_id = 33;
+    uint32 group_room_bus_id = 34;
+    uint32 group_room_create_time = 35;
+    uint32 group_player_num = 36; //组队玩家数量
+    int32 bot_difficulty_level = 37; 
+    uint32 abtest_player_flag = 38; 
+    uint32 ai_id = 39; 
+    bool is_half_join = 40; 
+	repeated uint32 loaded_mapid = 41;
+	uint32 playlist_id = 42; 
+};

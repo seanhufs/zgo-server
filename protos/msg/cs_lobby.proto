@@ -1,0 +1,92 @@
+syntax = "proto3";
+package msg;
+option go_package = "github.com/seanhufs/zgo-server/pb/pbm";
+
+import "obj/common.proto";
+
+message CSLobbyHeartbeatReq
+{
+    int32 padding = 1;
+};
+
+message CSLobbyHeartbeatRes
+{
+    int32 padding = 1;
+	uint64 tickCount = 2;
+};
+
+message CSLobbyJoinMatchNtf
+{
+    int32 result = 1;
+    uint32 roomId = 2;
+    uint32 mapId = 3;
+    uint32 dsIp = 4;
+    uint32 dsPort = 5;
+    obj.MatchPlayerInfo playerInfo = 6;
+    repeated obj.MatchPlayerInfo players = 7;
+};
+
+
+message CSLobbyLoginReq
+{
+    uint64 player_id = 1;
+
+    int32 zone_id = 3;
+    string pay_token = 4;
+    string pf = 5;
+    string session_id = 6;
+    string session_type = 7;
+
+    bool is_reconnect = 8;
+    int32 plat_id = 9;
+    //CSLoginClientInfo client_info = 10;
+    int32 login_source = 11;
+    
+    uint32 language_code = 16; //见 ELanguageCode
+    bool is_simulator  = 17; //是否使用模拟器，断线重连时判断是否用模拟器顶掉手机
+};
+
+message CSLobbyLoginRes
+{
+    int32 result = 1;
+	uint64 tick_count = 2;
+	int32 zone_id = 3;
+	bytes nick_name = 9;
+	int32 cur_svr_version = 13;
+	bytes game_nick = 14;
+	obj.PlayerPictureInfo pic_info = 15;
+	uint64 player_id = 16;
+	bytes download_url = 17;
+	repeated int32 newbie_guide_list = 18;
+    string err_msg = 19;
+    //PlayerPunishInfo punish_info = 20;
+	uint32 client_ip = 21;
+	uint32 worldchat_req_second = 22;
+	bytes lobby_bg_url = 23;
+	repeated bytes return_lobby_bg_url_list = 24;
+    //repeated DscIPGroupInfo ipgroup_info = 25;
+    repeated uint32 picture_ids  = 27;
+    string ds_crypt_key     = 28;
+    string ds_domain_name   = 29;
+    uint32 ds_port          = 30;
+    uint32 ds_ip          = 31;
+	uint32 map_id = 32;
+	uint32 room_id = 33;
+	bytes latest_version = 34;
+	bytes client_version = 35;
+	bytes rand_picurl_pre = 36; //128
+    bool hide_info = 37; // true hide, false show info.
+
+    //repeated MatchEndLoadingBackGroundConfig match_end_background = 38; 
+    uint64 room_guid = 39;
+    uint32 idip_zone_id = 40;
+	bytes relative_name = 41;
+    uint32 time_zone = 42; //时区
+    bytes gamezone_url = 43; // 游戏圈
+    uint32 abtest_tag = 44; //用于abtest的标签。
+    bytes pandora_tag = 45; //用于abtest的标签。
+	uint32 pp_mode = 46; //视角
+	int32 player_country_id = 47;
+	uint64 player_guid = 48;
+	bool is_close_avatar = 49;
+};

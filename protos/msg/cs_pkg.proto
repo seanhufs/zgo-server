@@ -1,0 +1,26 @@
+syntax = "proto3";
+package msg;
+option go_package = "github.com/seanhufs/zgo-server/pb/pbm";
+
+//import "common.proto";
+//import "cmd.proto";
+
+//enum CSPkgBodyMaxSize
+//{
+//    CSPKGBODY_MAX_SIZE = 64000;
+//};
+
+message CSPkgHead
+{
+    uint32 cmd = 1;
+    int32 platId = 2;
+    int32 clientSequenceId = 3;
+    uint64 modRouteId = 4;
+    int32 result = 5;
+};
+
+message CSPkg
+{
+    CSPkgHead head = 1;
+    bytes body = 2;
+};
